@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Composable Squares</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+    .box{
+        display:inline-block;
+        height:300px;
+        width:300px;
+    }
+</style>
+<body>
+    <div id="react">
+    </div>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+    <script>
+        const reactContainer = document.getElementById("react");
+        const Title = (props) => {
+            const { back } = props;
+            const { text } = props;
+            const { color } = props;
+            return React.createElement('div', {style:{ backgroundColor: back, color:color}, className:"box"}, text);
+        }
+        const App = (props) => {
+            return React.createElement('div', null,
+                React.createElement(Title, { text: 'white on blue', color: "white", back: "blue"} ),
+                React.createElement(Title, { text: 'blue on red', color: "blue", back: "red"} ),
+                React.createElement(Title, { text: 'green on pink', color: "green", back: "pink"} ),
+            )
+        }
+        ReactDOM.render(
+            React.createElement(App),
+            reactContainer
+        );
+    </script>
+</body>
+</html>

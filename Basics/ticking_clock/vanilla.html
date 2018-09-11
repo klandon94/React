@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ticking Clock (Vanilla JS)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        function updateTime(){
+            let today = new Date();
+            let hours = today.getHours();
+            let minutes = today.getMinutes();
+            let seconds = today.getSeconds();
+
+            if (seconds <= 9) seconds = "0" + seconds;
+
+            let time = hours + ":" + minutes + ":" + seconds;
+            document.getElementById("now").innerHTML = time;
+
+            setTimeout("updateTime()", 1000);
+        }
+    </script>
+</head>
+<body onload="updateTime()">
+    <h1>The current time is: <span id="now"></span></h1>
+</body>
+</html>

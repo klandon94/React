@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Checkerboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+</script>
+</head>
+<style>
+    .box{
+        display:inline-block;
+        height:300px;
+        width:300px;
+    }
+</style>
+<body>
+    <input type="text" id="columns" placeholder="Columns">
+    <input type="text" id="rows" placeholder="Rows">
+    <br><br>
+    <div id="react"></div>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+    <script>
+        var C = 0;
+        var R = 0;
+
+        $('#columns').on("keyup", ()=>{
+            C = $('#columns').val();
+        });
+
+        $('#rows').on("keyup", ()=>{
+            R = $('#rows').val();
+            if (C > 0 && R > 0) ReactDOM.render(React.createElement(App), reactContainer);
+        });
+
+        const reactContainer = document.getElementById("react");
+        const App = (props) => {
+            return React.createElement('div', null, 
+                React.createElement(Board,{rows: C, columns: R}))
+        }
+        const Board = (props) => {
+            const {columns} = props;
+            const {rows} = props;
+            let lines = [];
+            for (let i = 0; i< columns; i++){
+                if(i% 2 == 1) lines.push(React.createElement(Row,{number:rows, status: 1}));
+                else lines.push(React.createElement(Row,{number:rows, status: 0}));
+            }
+            return React.createElement('div', null, lines); 
+        }
+        function Row (props) {
+            const { status } = props;
+            const { number } = props;
+            let blocks = [];
+            for (let j = 0; j< number; j++){
+                if((j+status) % 2 == 1) blocks.push(React.createElement(Block, {color:'red'}));
+                else blocks.push(React.createElement(Block, {color:'black'}));
+            }
+            return React.createElement('div', null, blocks);
+        }
+        function Block (props) {
+            const { color } = props
+            return React.createElement('div', {style:{ backgroundColor: color, height: '50px', width: '50px', display:'inline-block'}}, "");
+        }
+    </script>
+</body>
+</html>

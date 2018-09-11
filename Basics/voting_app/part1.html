@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Voting App (Part 1)</title>
+  </head>
+  <body>
+    <div id="react"></div>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        const List = (props) => {
+          const listItems = props.items.map((item) => {
+            return <div key={item.name}>{item.value} {item.name}<button onClick={() => alert("You voted for "+item.name + "!")}>Vote!</button></div>
+          });
+          return (
+            <div>
+              {listItems}
+            </div>
+          );
+        }
+        ReactDOM.render(<List items= { [{name:'React', value:15}, {name:'Vue', value:12},{name:'Angular',value:9},{name: 'Ember', value:4}] } />, document.getElementById('react'));
+    </script>
+  </body>
+</html>
